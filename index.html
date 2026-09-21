@@ -101,7 +101,7 @@
   <div class="modal-content">
     <h2 class="quiz-title">✨ ピックアップガチャ開催！</h2>
     <div class="quiz-desc">
-      限定イベント開催！クイズに正解して、ピックアップ枠を開放しよう！
+      クイズに正解して、ピックアップ枠を開放しよう！
     </div>
 
     <p style="font-weight:bold; margin-bottom:10px;">Q. 特定の思想を広めたり、世論を誘導するために行われる、意図的な情報発信・宣伝活動を何と呼ぶ？</p>
@@ -153,7 +153,7 @@
       （<a href="https://www.cao.go.jp/yosan/soshiki/r09/gaiyou_r09.pdf" target="_blank" class="ref-link">https://www.cao.go.jp/yosan/soshiki/r09/gaiyou_r09.pdf</a>）
     </p>
 
-    <button class="btn-share" style="display:block; margin-bottom:10px;" onclick="shareClearOnX()">𝕏 でCLEAR結果をシェア</button>
+    <button class="btn-share" style="display:block; margin-bottom:10px;" onclick="shareClearOnX()">𝕏 で結果をシェア</button>
     <button onclick="closeClearModal()" style="width:100%; padding:10px; background:#555; color:white; border:none; border-radius:6px; cursor:pointer;">閉じる</button>
   </div>
 </div>
@@ -165,20 +165,25 @@
   const items = [
     { name: "内閣広報室 令和９年度予算", cost: 72, category: "政治" },
     { name: "政府広報費 令和９年度予算", cost: 280, category: "政治" },
-    { name: "学校への空調設置100校分", cost: 50, category: "政治" },
-    { name: "トマホーク1発", cost: 7, category: "政治" },
-    { name: "都庁プロジェクションマッピング1年分", cost: 8, category: "政治" },
     { name: "全国の小学校給食 1か月分無償化", cost: 200, category: "政治" },
-    { name: "ミラノ風ドリア1,000万食", cost: 30, category: "一般" },
-    { name: "宇宙旅行（ISS滞在約2週間）", cost: 82.5, category: "一般" },
+    { name: "学校への空調（エアコン）設置 100校分", cost: 50, category: "政治" },
+    { name: "トマホーク1発", cost: 7, category: "政治" },
     { name: "うまい棒 2億本", cost: 30, category: "一般" },
-    { name: "大河ドラマ制作1年分", cost: 30, category: "一般" },
+    { name: "ミラノ風ドリア 1,000万食", cost: 30, category: "一般" },
+    { name: "高級マグロ 初競り最高値 100年分", cost: 35, category: "一般" },
+    { name: "一生分のタピオカミルクティー（1万杯）", cost: 0.06, category: "一般" },
+    { name: "納豆 1億パック", cost: 10, category: "一般" },
+    { name: "たこ焼き 5,000万個", cost: 25, category: "一般" },
     { name: "東京ドーム貸し切り 約5年間分", cost: 100, category: "一般" },
-    { name: "富士山全土の除雪作業（1回分）", cost: 50, category: "一般" },
-    { name: "超巨大テーマパークの新アトラクション建設", cost: 150, category: "一般" },
-    { name: "金塊1トン", cost: 150, category: "一般" },
+    { name: "大河ドラマ制作 1年分", cost: 30, category: "一般" },
+    { name: "都庁プロジェクションマッピング 1年分", cost: 8, category: "政治" },
+    { name: "宇宙旅行（ISS滞在 約2週間）", cost: 82.5, category: "一般" },
     { name: "月旅行（民間人1人分）", cost: 120, category: "一般" },
-    { name: "高級マグロ 初競り最高値 100年分", cost: 35, category: "一般" }
+    { name: "金塊1トン", cost: 150, category: "一般" }, 
+    { name: "スクランブル交差点メディアジャック半年分", cost: 9, category: "一般" },
+　　{ name: "苗木 3,500万本", cost: 105, category: "一般" },
+　　{ name: "点字ブロック 100km分", cost: 15, category: "一般" },
+　　{ name: "みかん 1億個", cost: 50, category: "一般" },
   ];
 
   let currentSelected = [];
