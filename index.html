@@ -7,107 +7,158 @@
   <style>
     body { font-family: sans-serif; text-align: center; background: #f0f2f5; padding: 20px; color: #333; }
     .card { background: white; border-radius: 12px; padding: 20px; max-width: 500px; margin: 0 auto; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-    button { background: #007bff; color: white; border: none; padding: 12px 24px; font-size: 16px; border-radius: 6px; cursor: pointer; margin-top: 15px; font-weight: bold; }
-    button:hover { background: #0056b3; }
-    .item-list { text-align: left; background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0; }
-    .item { margin: 8px 0; display: flex; justify-content: space-between; align-items: center; }
-    .total { font-size: 24px; font-weight: bold; color: #d9534f; margin: 15px 0; }
-    .secret-btn { background: none; border: none; color: #ccc; font-size: 12px; cursor: pointer; }
-    /* 真エンド用モーダル */
-    #true-ending { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); color: white; justify-content: center; align-items: center; }
-    .modal-content { background: #222; padding: 30px; border-radius: 12px; max-width: 450px; border: 2px solid #ffd700; text-align: left; }
-    .modal-content h2 { color: #ffd700; text-align: center; }
+    .btn-main { background: #007bff; color: white; border: none; padding: 12px 24px; font-size: 16px; border-radius: 6px; cursor: pointer; margin-top: 15px; font-weight: bold; width: 100%; }
+    .btn-main:hover { background: #0056b3; }
+    .btn-share { background: #1da1f2; color: white; border: none; padding: 10px 20px; font-size: 14px; border-radius: 6px; cursor: pointer; margin-top: 10px; font-weight: bold; width: 100%; display: none; }
+    .btn-share:hover { background: #0d8ddb; }
+    .item-list { text-align: left; background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0; min-height: 40px; }
+    .item { margin: 8px 0; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed #ddd; padding-bottom: 4px; }
+    .item:last-child { border-bottom: none; }
+    .total { font-size: 22px; font-weight: bold; color: #d9534f; margin: 15px 0 5px 0; }
+    .diff-status { font-size: 16px; font-weight: bold; color: #28a745; margin-bottom: 15px; }
+
+    /* CLEARモーダル */
+    #clear-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); color: white; justify-content: center; align-items: center; z-index: 1000; }
+    .modal-content { background: #222; padding: 30px; border-radius: 12px; max-width: 450px; border: 2px solid #ffd700; text-align: left; box-shadow: 0 0 20px rgba(255, 215, 0, 0.4); }
+    .modal-content h2 { color: #ffd700; text-align: center; margin-top: 0; font-size: 28px; }
+    .ref-link { color: #4da6ff; word-break: break-all; }
   </style>
 </head>
 <body>
 
 <div class="card">
-  <h1>国家予算ガチャ</h1>
-  <p>350億円分の予算を組んでみよう！</p>
-  
-  <div class="item-list" id="result-list">
-    <p style="text-align:center; color:#888;">「ガチャを引く」を押してください</p>
-  </div>
+  <h1>350億円ガチャ</h1>
+  <p>ぴったり350億円をめざそう</p>
 
-  <div class="total" id="total-amount">合計: 0 億円</div>
+  <div class="item-list" id="result-list"></div>
 
-  <button onclick="drawGacha()">🎰 ガチャを引く</button>
-  <br><br>
-  <button class="secret-btn" onclick="forceSecret()">※特定項目を固定選択する</button>
+  <div class="total" id="total-amount">合計: 0 円</div>
+  <div class="diff-status" id="diff-status"></div>
+
+  <button class="btn-main" onclick="drawGacha()">ガチャを回す</button>
+  <button class="btn-share" id="share-btn" onclick="shareOnX()">𝕏 で結果をシェア</button>
 </div>
 
-<!-- 真エンディングモーダル -->
-<div id="true-ending">
+<!-- CLEARモーダル -->
+<div id="clear-modal">
   <div class="modal-content">
-    <h2>🎉 COMPLETE：352.8億円</h2>
+    <h2>🎉 CLEAR</h2>
+    <p style="text-align:center; font-size:18px; font-weight:bold; color:#ffd700;">35,000,000,000 円（350億円）達成！</p>
     <p><strong>【選ばれた予算の内訳】</strong></p>
     <ul>
-      <li>政府広報費の抜本強化：<strong>280.5 億円</strong></li>
-      <li>内閣広報室 予算：<strong>72.3 億円</strong></li>
+      <li>国内外への効果的かつ戦略的な政府広報の抜本強化：<strong>28,000,000,000 円</strong></li>
+      <li>内閣広報室 予算：<strong>7,000,000,000 円</strong></li>
     </ul>
-    <hr>
-    <p><strong>【真の解説】</strong><br>
-    お見事です！あなたが組み合わされたのは、令和9年度概算要求に記載された実在の<strong>「国の広報関連予算」</strong>の満額です。</p>
-    <p>映画の制作費数十本分、東京ドーム何年分もの巨額な予算が、たった1年間の政府のPR活動に使われようとしています。</p>
-    <button onclick="closeModal()" style="width:100%;">閉じる</button>
+    <hr style="border-color:#444;">
+    <p><strong>【解説】</strong><br>
+    あなたが引き当てたのは、実在する<strong>「国の広報関連予算」</strong>に相当する金額です。<br>
+    映画の制作費数十本分、豪華なエンタメや生活費用に換算できる巨額の予算が、たった1年間の政府PR活動に使われています。</p>
+
+    <!-- 参考サイトURLエリア -->
+    <p><strong>【参考資料・関連リンク】</strong><br>
+    <a href="https://example.com" target="_blank" class="ref-link" id="reference-url">https://example.com</a>
+    </p>
+
+    <button class="btn-share" style="display:block; margin-bottom:10px;" onclick="shareClearOnX()">𝕏 でCLEAR結果をシェア</button>
+    <button onclick="closeModal()" style="width:100%; padding:10px; background:#555; color:white; border:none; border-radius:6px; cursor:pointer;">閉じる</button>
   </div>
 </div>
 
 <script>
-  // ダミーアイテム（通常ガチャ用）
-  const dummyItems = [
-    { name: "映画『ゴジラ-1.0』級の映画制作", cost: 15.0 },
-    { name: "東京ドーム全館貸切（100日分）", cost: 20.0 },
-    { name: "サイゼリヤのミラノ風ドリア（1,000万食）", cost: 30.0 },
-    { name: "新幹線N700S（1編成）", cost: 45.0 },
-    { name: "宇宙旅行（ISS滞在コース）", cost: 80.0 },
-    { name: "大谷翔平選手の年間報酬", cost: 100.0 }
+  const TARGET_BUDGET = 35000000000; // 350億円
+
+  // ガチャのアイテム一覧（金額は円表記で定義）
+  const items = [
+    // ターゲット（CLEAR条件要素：合計350億円）
+    { name: "国内外への効果的かつ戦略的な政府広報の抜本強化", cost: 28000000000, target: true },
+    { name: "内閣広報室 予算", cost: 7000000000, target: true },
+
+    // その他エンタメ・文化・生活費など
+    { name: "映画『ゴジラ-1.0』制作費", cost: 1500000000 },
+    { name: "映画『君の名は。』制作費", cost: 750000000 },
+    { name: "アニメ映画（超大作）制作費", cost: 2000000000 },
+    { name: "東京ドーム全館貸切（100日分）", cost: 2000000000 },
+    { name: "新幹線N700S（1編成16両）", cost: 4500000000 },
+    { name: "大谷翔平選手の年間報酬換算", cost: 10000000000 },
+    { name: "宇宙旅行（ISS滞在コース）", cost: 8000000000 },
+    { name: "都心超高級タワマンペントハウス（1戸）", cost: 3000000000 },
+    { name: "国立美術館の年間美術品購入費", cost: 1000000000 },
+    { name: "大型音楽フェス開催費（1回分）", cost: 500000000 },
+    { name: "サイゼリヤのミラノ風ドリア（1,000万食）", cost: 3000000000 },
+    { name: "全国の小中学校への図書購入補助", cost: 5000000000 },
+    { name: "地方都市の路面電車（LRT）1路線整備費", cost: 15000000000 },
+    { name: "金メダル級アスリートの生涯強化費支援（10人分）", cost: 1000000000 },
+    { name: "人気劇団の年間全公演運営費", cost: 300000000 },
+    { name: "全国の図書館への児童書全巻一括寄贈", cost: 1200000000 },
+    { name: "大型テーマパークの新エリア開発費の一部", cost: 20000000000 },
+    { name: "うまい棒（2億本分）", cost: 3000000000 }
   ];
 
-  // 真エンド構成要素
-  const secretItems = [
-    { name: "国内外への効果的かつ戦略的な政府広報の抜本強化", cost: 280.5 },
-    { name: "内閣広報室", cost: 72.3 }
-  ];
+  let currentSelected = [];
+  let currentTotal = 0;
 
   function drawGacha() {
-    // ランダムに3つ選ぶ
-    let shuffled = [...dummyItems].sort(() => 0.5 - Math.random());
-    let selected = shuffled.slice(0, 3);
-    
-    displayResult(selected);
+    let shuffled = [...items].sort(() => 0.5 - Math.random());
+    let selectCount = Math.random() < 0.5 ? 2 : 3;
+    currentSelected = shuffled.slice(0, selectCount);
+
+    displayResult(currentSelected);
   }
 
-  function forceSecret() {
-    // 隠しボタンで真エンド用アイテムをセット
-    displayResult(secretItems);
-  }
-
-  function displayResult(items) {
+  function displayResult(selectedItems) {
     let listHtml = "";
-    let sum = 0;
+    currentTotal = 0;
 
-    items.forEach(item => {
-      listHtml += `<div class="item"><span>${item.name}</span><b>${item.cost} 億円</b></div>`;
-      sum += item.cost;
+    selectedItems.forEach(item => {
+      listHtml += `<div class="item"><span>${item.name}</span><b>${item.cost.toLocaleString()} 円</b></div>`;
+      currentTotal += item.cost;
     });
 
-    // 小数点第1位の誤差対策
-    sum = Math.round(sum * 10) / 10;
-
     document.getElementById("result-list").innerHTML = listHtml;
-    document.getElementById("total-amount").innerText = `合計: ${sum} 億円`;
+    document.getElementById("total-amount").innerText = `合計: ${currentTotal.toLocaleString()} 円`;
 
-    // 352.8億円ぴったりなら真エンド表示
-    if (sum === 352.8) {
+    // 350億円に対する差額計算と表示
+    const diffStatusEl = document.getElementById("diff-status");
+    if (currentTotal === TARGET_BUDGET) {
+      diffStatusEl.innerText = "ぴったり350億円！";
+      diffStatusEl.style.color = "#d9534f";
+    } else if (currentTotal < TARGET_BUDGET) {
+      const remaining = TARGET_BUDGET - currentTotal;
+      diffStatusEl.innerText = `${remaining.toLocaleString()} 円 余った（まだ使えるよ / もっと有益に使おう）`;
+      diffStatusEl.style.color = "#28a745";
+    } else {
+      const over = currentTotal - TARGET_BUDGET;
+      diffStatusEl.innerText = `${over.toLocaleString()} 円 オーバー（予算オーバー！）`;
+      diffStatusEl.style.color = "#dc3545";
+    }
+
+    document.getElementById("share-btn").style.display = "block";
+
+    // ぴったり350億円（ターゲット2つの組み合わせ）ならCLEAR表示
+    if (currentTotal === TARGET_BUDGET && selectedItems.length === 2 && selectedItems.every(i => i.target)) {
       setTimeout(() => {
-        document.getElementById("true-ending").style.display = "flex";
-      }, 500);
+        document.getElementById("clear-modal").style.display = "flex";
+      }, 300);
     }
   }
 
   function closeModal() {
-    document.getElementById("true-ending").style.display = "none";
+    document.getElementById("clear-modal").style.display = "none";
+  }
+
+  // SNS（X）シェア機能（通常用）
+  function shareOnX() {
+    const names = currentSelected.map(i => i.name).join("＋");
+    const text = encodeURIComponent(`【350億円ガチャ結果】\n${names}\n👉 合計：${currentTotal.toLocaleString()} 円！\n\n#350億円ガチャ`);
+    const url = encodeURIComponent(window.location.href);
+    window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+  }
+
+  // SNS（X）シェア機能（CLEAR用）
+  function shareClearOnX() {
+    const text = encodeURIComponent(`【350億円ガチャ CLEAR!】\n「政府広報費（280億円）」＋「内閣広報室（70億円）」を引き当てました！\n👉 合計：35,000,000,000 円（ぴったり350億円）\n\n#350億円ガチャ`);
+    const url = encodeURIComponent(window.location.href);
+    window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
   }
 </script>
 
