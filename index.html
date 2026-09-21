@@ -59,6 +59,21 @@
     .total { font-size: 22px; font-weight: bold; color: #d9534f; margin: 15px 0 5px 0; }
     .diff-status { font-size: 16px; font-weight: bold; color: #28a745; margin-bottom: 15px; }
 
+    /* CLEAR解説枠（通常画面内に表示） */
+    .clear-info-box {
+      display: none;
+      text-align: left;
+      background: #fff8e1;
+      border: 2px solid #ffd700;
+      border-radius: 8px;
+      padding: 15px;
+      margin-top: 15px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .clear-info-box p { margin: 8px 0; }
+    .ref-link { color: #007bff; word-break: break-all; }
+
     /* モーダル共通 */
     .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); color: white; justify-content: center; align-items: center; z-index: 1000; }
     .modal-content { background: #222; padding: 25px; border-radius: 12px; max-width: 480px; width: 90%; text-align: left; box-shadow: 0 0 20px rgba(0,0,0,0.5); max-height: 90vh; overflow-y: auto; }
@@ -70,10 +85,6 @@
     .quiz-opt-btn { background: #444; color: white; border: 1px solid #666; padding: 12px; border-radius: 6px; font-size: 16px; cursor: pointer; text-align: left; transition: 0.2s; }
     .quiz-opt-btn:hover { background: #555; border-color: #ffd700; }
     .quiz-result { margin-top: 15px; font-weight: bold; text-align: center; font-size: 16px; min-height: 24px; }
-
-    /* CLEARモーダル用 */
-    #clear-modal .modal-content { border: 2px solid #ffd700; box-shadow: 0 0 20px rgba(255, 215, 0, 0.4); }
-    .ref-link { color: #4da6ff; word-break: break-all; }
   </style>
 </head>
 <body>
@@ -91,6 +102,26 @@
 
   <div class="total" id="total-amount">合計: 0 億円</div>
   <div class="diff-status" id="diff-status"></div>
+
+  <!-- CLEAR解説（ぴったり350億円達成時に通常画面に表示） -->
+  <div class="clear-info-box" id="clear-info-box">
+    <p>あなたが引き当てたのは、令和9年度の政府の広報関連予算額です。<br>
+    巨額の予算が政府のPR・情報発信活動に使われるおそれがあります。<br>
+    根拠や内訳は公表されていません。いったい何を広報するのでしょうか。</p>
+
+    <p style="background: #f0f0f0; padding: 10px; border-radius: 6px; font-weight: bold;">
+      内閣広報室 7億円 → 72億円（約10倍超）<br>
+      政府広報費 78.8億円 →280.5億円（約3.6倍）
+    </p>
+
+    <p style="font-size: 13px; color: #555; margin-bottom: 0;">
+      <strong>参考：</strong><br>
+      内閣官房「令和9年度予算概算要求の概要」<br>
+      （<a href="https://www.cas.go.jp/jp/yosan/pdf/r9_yosan_gaisan.pdf" target="_blank" class="ref-link">https://www.cas.go.jp/jp/yosan/pdf/r9_yosan_gaisan.pdf</a>）<br><br>
+      内閣府「令和9年度予算概算要求の概要」<br>
+      （<a href="https://www.cao.go.jp/yosan/soshiki/r09/gaiyou_r09.pdf" target="_blank" class="ref-link">https://www.cao.go.jp/yosan/soshiki/r09/gaiyou_r09.pdf</a>）
+    </p>
+  </div>
 
   <button class="btn-main" id="gacha-btn" onclick="handleGachaClick()">ガチャを回す</button>
   <button class="btn-share" id="share-btn" onclick="shareOnX()">𝕏 で結果をシェア</button>
@@ -122,44 +153,9 @@
   </div>
 </div>
 
-<!-- CLEARモーダル -->
-<div id="clear-modal" class="modal-overlay">
-  <div class="modal-content">
-    <h2>🎉 CLEAR</h2>
-    <p style="text-align:center; font-size:20px; font-weight:bold; color:#ffd700;">合計350億円</p>
-    
-    <p><strong>【ガチャ結果】</strong></p>
-    <ul>
-      <li>内閣広報室 令和９年度予算：<strong>72 億円</strong></li>
-      <li>政府広報費 令和９年度予算：<strong>280 億円</strong></li>
-    </ul>
-
-    <hr style="border-color:#444;">
-
-    <p>あなたが引き当てたのは、令和9年度の政府の広報関連予算額です。<br>
-    巨額の予算が政府のPR・情報発信活動に使われるおそれがあります。<br>
-    根拠や内訳は公表されていません。いったい何を広報するのでしょうか。</p>
-
-    <p style="background:#333; padding:10px; border-radius:6px; font-size:14px; line-height:1.6;">
-      内閣広報室 7億円 → 72億円（約10倍超）<br>
-      政府広報費 78.8億円 →280.5億円（約3・6倍）
-    </p>
-
-    <p style="font-size:13px; color:#ccc;">
-      <strong>参考：</strong><br>
-      内閣官房「令和9年度予算概算要求の概要」<br>
-      （<a href="https://www.cas.go.jp/jp/yosan/pdf/r9_yosan_gaisan.pdf" target="_blank" class="ref-link">https://www.cas.go.jp/jp/yosan/pdf/r9_yosan_gaisan.pdf</a>）<br><br>
-      内閣府「令和9年度予算概算要求の概要」<br>
-      （<a href="https://www.cao.go.jp/yosan/soshiki/r09/gaiyou_r09.pdf" target="_blank" class="ref-link">https://www.cao.go.jp/yosan/soshiki/r09/gaiyou_r09.pdf</a>）
-    </p>
-
-    <button class="btn-share" style="display:block; margin-bottom:10px;" onclick="shareClearOnX()">𝕏 で結果をシェア</button>
-    <button onclick="closeClearModal()" style="width:100%; padding:10px; background:#555; color:white; border:none; border-radius:6px; cursor:pointer;">閉じる</button>
-  </div>
-</div>
-
 <script>
   const TARGET_BUDGET = 350;
+  const MIN_BUDGET = 250; // ガチャ排出時の最小値
 
   // アイテムリスト
   const items = [
@@ -171,26 +167,25 @@
     { name: "うまい棒 2億本", cost: 30, category: "一般" },
     { name: "ミラノ風ドリア 1,000万食", cost: 30, category: "一般" },
     { name: "高級マグロ 初競り最高値 100年分", cost: 35, category: "一般" },
-    { name: "一生分のタピオカミルクティー（1万杯）", cost: 0.06, category: "一般" },
     { name: "納豆 1億パック", cost: 10, category: "一般" },
     { name: "たこ焼き 5,000万個", cost: 25, category: "一般" },
     { name: "東京ドーム貸し切り 約5年間分", cost: 100, category: "一般" },
     { name: "大河ドラマ制作 1年分", cost: 30, category: "一般" },
     { name: "都庁プロジェクションマッピング 1年分", cost: 8, category: "政治" },
-    { name: "宇宙旅行（ISS滞在 約2週間）", cost: 82.5, category: "一般" },
+    { name: "宇宙旅行（ISS滞在 約2週間）", cost: 82, category: "一般" },
     { name: "月旅行（民間人1人分）", cost: 120, category: "一般" },
     { name: "金塊1トン", cost: 150, category: "一般" }, 
     { name: "スクランブル交差点メディアジャック半年分", cost: 9, category: "一般" },
-　　{ name: "苗木 3,500万本", cost: 105, category: "一般" },
-　　{ name: "点字ブロック 100km分", cost: 15, category: "一般" },
-　　{ name: "みかん 1億個", cost: 50, category: "一般" },
+    { name: "苗木 3,500万本", cost: 105, category: "一般" },
+    { name: "点字ブロック 100km分", cost: 15, category: "一般" },
+    { name: "みかん 1億個", cost: 50, category: "一般" },
   ];
 
   let currentSelected = [];
   let currentTotal = 0;
   let spinCount = 0;
   let isPickupUnlocked = false; // クイズ正解フラグ
-  let isPickupReady = false;    // メインボタン「ピックアップガチャ」
+  let isPickupReady = false;    // メインボタン「ピックアップガチャ」待機状態
 
   // ガチャボタン押下時ハンドラ
   function handleGachaClick() {
@@ -205,18 +200,20 @@
   function drawRandomGacha() {
     spinCount++;
 
-    // 5回以上ガチャを回したらテロップを【開催中】へ更新
+    // クリア枠表示を隠す
+    document.getElementById("clear-info-box").style.display = "none";
+
+    // 5回以上ガチャを回したらテロップを【開催中】へ更新（※背景色は変更しない）
     if (spinCount >= 5) {
       const marqueeEl = document.getElementById("marquee-text");
       marqueeEl.innerText = "【開催中】ピックアップガチャ 詳細はこちら";
-      document.getElementById("announce-bar").style.background = "#ffca28";
     }
 
     let attempts = 0;
     let selected = [];
     let sum = 0;
 
-    while (attempts < 2000) {
+    while (attempts < 3000) {
       attempts++;
       selected = [];
       sum = 0;
@@ -233,6 +230,10 @@
 
       if (selected.length < 2) continue;
       if (selected.every(i => i.category === "政治")) continue;
+      
+      // ガチャ排出時の最小値を250億円以上に設定
+      if (sum < MIN_BUDGET) continue;
+
       break;
     }
 
@@ -257,10 +258,16 @@
     document.getElementById("total-amount").innerText = `合計: 350 億円`;
     document.getElementById("diff-status").innerText = "ぴったり350億円！";
     document.getElementById("diff-status").style.color = "#d9534f";
+    
+    // クリア解説文言をインライン表示
+    document.getElementById("clear-info-box").style.display = "block";
     document.getElementById("share-btn").style.display = "block";
 
-    // CLEARモーダル表示
-    document.getElementById("clear-modal").style.display = "flex";
+    // 1回実行したため「ピックアップガチャ」を解除し、通常の「ガチャを回す」に戻す
+    isPickupReady = false;
+    const btn = document.getElementById("gacha-btn");
+    btn.innerText = "ガチャを回す";
+    btn.classList.remove("btn-pickup");
   }
 
   function displayResult(selectedItems) {
@@ -287,10 +294,9 @@
 
   // 上部告知枠のクリック処理
   function handleAnnounceClick() {
+    // 5回以上通常ガチャを回している場合のみアクション（クイズ表示）を有効化
     if (spinCount >= 5) {
       document.getElementById("quiz-modal").style.display = "flex";
-    } else {
-      alert("ピックアップガチャは5回以上通常ガチャを回すと開催されます！");
     }
   }
 
@@ -326,21 +332,15 @@
     document.getElementById("quiz-modal").style.display = "none";
   }
 
-  function closeClearModal() {
-    document.getElementById("clear-modal").style.display = "none";
-  }
-
-  // Xシェア処理（通常）
+  // Xシェア処理
   function shareOnX() {
-    const remaining = Math.round((TARGET_BUDGET - currentTotal) * 100) / 100;
-    const text = encodeURIComponent(`【350億円ガチャ結果】 合計${currentTotal} 億円！${remaining} 億円余った #350億円ガチャ`);
-    const url = encodeURIComponent(window.location.href);
-    window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
-  }
-
-  // Xシェア処理（CLEAR）
-  function shareClearOnX() {
-    const text = encodeURIComponent(`【350億円ガチャ結果】 ぴったり350億円！ #350億円ガチャ`);
+    let text = "";
+    if (currentTotal === 350) {
+      text = encodeURIComponent(`【350億円ガチャ結果】 ぴったり350億円！ #350億円ガチャ`);
+    } else {
+      const remaining = Math.round((TARGET_BUDGET - currentTotal) * 100) / 100;
+      text = encodeURIComponent(`【350億円ガチャ結果】 合計${currentTotal} 億円！${remaining} 億円余った #350億円ガチャ`);
+    }
     const url = encodeURIComponent(window.location.href);
     window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
   }
