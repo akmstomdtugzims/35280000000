@@ -255,7 +255,7 @@
   // 確定ガチャ（ピックアップガチャ）
   function drawClearGacha() {
     currentSelected = [
-      { name: "内閣広報室 令和９年度予算", cost: 72 },
+      { name: "内閣広報室 令和９年度予算", cost: 70 },
       { name: "政府広報費 令和９年度予算", cost: 280 }
     ];
     currentTotal = 350;
@@ -267,7 +267,6 @@
 
     document.getElementById("result-list").innerHTML = listHtml;
     document.getElementById("total-amount").innerText = `合計: 350 億円`;
-    document.getElementById("diff-status").innerText = "ぴったり350億円！";
     document.getElementById("diff-status").style.color = "#d9534f";
     
     // クリア解説文言をインライン表示
